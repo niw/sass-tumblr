@@ -1,7 +1,7 @@
 sass-tumblr
 ===========
 
-Ignore [Tumblr]() template tags like ``a { color: {color:Text}; }`` while parsing SCSS.
+Ignore [Tumblr template tags](https://www.tumblr.com/docs/en/custom_themes) like ``a { color: {color:Text}; }`` while parsing SCSS.
 
 Usage
 -----
