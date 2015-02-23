@@ -26,3 +26,18 @@ Parse SCSS with Tumblr template tags using `rib`.
     irb> puts Sass::Engine.new("body {color: {color:Text}}", :syntax => :scss).render
     body {
       color: {color:Text}; }
+
+Limitations
+-----------
+
+At this moment, all Tumblr tags in SCSS must be one of next format.
+Basically it follows [Tumbler template document](https://www.tumblr.com/docs/en/custom_themes), but not all existing templates are following this rule.
+
+    {CapitalizedTagName}
+    {CustomCSS}
+    {color:Capitalized Key Name}
+    {font:Capitalized Key Name}
+    {text:Capitalized Key Name}
+    {image:Capitalized Key Name}
+
+Also `{block:KeyName}` and `{/block:KeyName}` may not work.
