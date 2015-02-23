@@ -4,7 +4,7 @@ module Sass
   module SCSS
     module RX
       # Pattern to match Tumblr tag.
-      TUMBLR_TAG = /({[a-zA-Z0-9_]+(?::[a-zA-Z0-9_]+)?})/
+      TUMBLR_TAG = /({(?:[A-Z][a-zA-Z0-9\-]*|(block|color|font|select|text|image):[A-Z][a-zA-Z0-9\-_ ]*)})/
       # Handle special `{CustomCSS}' tag as a comment,
       # which can appear independently in CSS.
       TUMBLR_CUSTOM_CSS_TAG = /{CustomCSS}/i

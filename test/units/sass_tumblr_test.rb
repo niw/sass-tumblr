@@ -3,16 +3,20 @@ require File.expand_path("../../test_helper", __FILE__)
 class SassTumblrTest < Test::Unit::TestCase
   TestCases = {
     :tag_in_selector => [
-      "{Tag:Tag} { key: value; }",
-      "{Tag:Tag}{key:value}"
+      "{Tag} { key: value; } {text:Key} { key: value; }",
+      "{Tag}{key:value}{text:Key}{key:value}"
     ],
     :tag_in_key => [
-      "selector { {Tag:Tag}: value; }",
-      "selector{{Tag:Tag}:value}"
+      "selector { {Tag}: value; {text:Key}: value; }",
+      "selector{{Tag}:value;{text:Key}:value}"
     ],
     :tag_in_value => [
-      "selector { key: {Tag} ident {Tag:Tag}; }",
-      "selector{key:{Tag} ident {Tag:Tag}}"
+      "selector { key: {Tag} ident {text:Key}; }",
+      "selector{key:{Tag} ident {text:Key}}"
+    ],
+    :custom_css_tag => [
+      "/*commend\ncomment*/selector { key: value; }\n{CustomCSS}\nselector { key: value; }",
+      "selector{key:value}{CustomCSS}selector{key:value}"
     ]
   }
 
