@@ -5,6 +5,10 @@ module Sass
     module RX
       # Pattern to match Tumblr tag.
       TUMBLR_TAG = /({[a-zA-Z0-9_]+(?::[a-zA-Z0-9_]+)?})/
+      # Handle special `{CustomCSS}' tag as a comment,
+      # which can appear independently in CSS.
+      TUMBLR_CUSTOM_CSS_TAG = /{CustomCSS}/i
+      COMMENT = /#{COMMENT.source}|#{TUMBLR_CUSTOM_CSS_TAG}/
     end
 
     # See lib/sass/scss/static_parser.rb
@@ -50,6 +54,20 @@ module Sass
           [tag]
         else
           interp_ident_without_tumblr(ident)
+        end
+      end
+
+      # Handlt Tumblr custom css tag
+      # Treat the tag as comment and yet visible in compact style.
+      alias :process_comment_without_tumblr :process_comment
+      def process_comment(text, node)
+        case text
+        when TUMBLR_CUSTOM_CSS_TAG
+          comment = Sass::Tree::CommentNode.new([text], :loud)
+          comment.line = @line
+          node << comment
+        else
+          process_comment_without_tumblr(text, node)
         end
       end
 
