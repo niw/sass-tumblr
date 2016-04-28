@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "sass-tumblr"
-  spec.version       = "0.2.0"
+  spec.version       = "0.3.0"
   spec.authors       = ["Yoshimasa Niwa"]
   spec.email         = ["niw@niw.at"]
   spec.homepage      = "https://github.com/niw/sass-tumblr"
@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "sass", "~> 3.4.10"
+  spec.add_runtime_dependency "sass", "~> 3.4.22"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
