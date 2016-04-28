@@ -8,7 +8,10 @@ module Sass
       # Handle special `{CustomCSS}' tag as a comment,
       # which can appear independently in CSS.
       TUMBLR_CUSTOM_CSS_TAG = /{CustomCSS}/i
-      COMMENT = /#{COMMENT.source}|#{TUMBLR_CUSTOM_CSS_TAG}/
+
+      comment = COMMENT
+      remove_const(:COMMENT)
+      COMMENT = /#{comment.source}|#{TUMBLR_CUSTOM_CSS_TAG}/
     end
 
     # See lib/sass/scss/static_parser.rb
@@ -74,7 +77,7 @@ module Sass
       # Avoid to parse first "{" as a block in declaration for Tumblr tags in CSS value
       # Used from all parsers.
       alias :value_without_tumblr! :value!
-      def value!
+      def value!(css_variable = false)
         if tok?(TUMBLR_TAG)
           sass_script(:parse)
         else
